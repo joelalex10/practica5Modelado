@@ -1,7 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {EjercicioDadosComponent} from "./components/ejercicio-dados/ejercicio-dados.component";
+import {LlegadaClientesComponent} from "./components/llegada-clientes/llegada-clientes.component";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'ejercicio-dados',
+    component: EjercicioDadosComponent,
+  },
+  {
+    path: 'llegada-clientes',
+    component: LlegadaClientesComponent,
+  },
+  {
+    path: '**',
+    redirectTo:'ejercicio-dados',
+  },
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

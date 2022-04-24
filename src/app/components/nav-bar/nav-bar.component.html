@@ -1,0 +1,15 @@
+<div>
+  <mat-toolbar color="primary">
+    <span>Practica 5</span>
+    <div class="spacer"></div>
+    <button [routerLink]="['/ejercicio-dados']" mat-button>Lanzamiento Dados</button>
+    <button [routerLink]="['/llegada-clientes']" mat-button>Llegada Clientes</button>
+    <button mat-button>Ejericicio Gallina</button>
+    <button mat-button>Agencia Azucar</button>
+
+  </mat-toolbar>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

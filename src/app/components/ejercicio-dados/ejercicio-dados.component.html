@@ -1,0 +1,76 @@
+
+<div class="title">
+  <mat-card-title>LANZAMIENTO DE DADOS</mat-card-title>
+</div>
+<hr>
+
+
+
+<div class="row">
+  <div class="col-5">
+    <div class="container">
+      <div class="row">
+        <mat-card>
+
+          <mat-card-title>Ingresar Parametros</mat-card-title>
+          <span *ngIf="valid; else space" [ngStyle]="{color:hintColor }">*Todos los campos son obligatorios</span>
+          <ng-template #space>
+            <br>
+          </ng-template>
+          <form [formGroup]="generateData" (ngSubmit)="generarNumeros()">
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100" >
+                <mat-label>Numero maximo de juegos</mat-label>
+                <input matInput
+                       placeholder="Ingrese el numero maximo de juegos"
+                       type="number"
+                       formControlName="nMax"
+                       required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Costo del juego</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ingrese el costo que tendra un juego"
+                       formControlName="cJuego"
+                       required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Ganancia de jugador</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ingrese la ganancia que obtendra el jugador al ganar un juego"
+                       formControlName="gJug"
+                       required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="row ">
+              <div class="col mt-3 mx-auto d-flex justify-content-center">
+                <button  mat-raised-button color="primary" type="submit">
+                  <mat-icon>arrow_forward</mat-icon>
+                  GENERAR NUMEROS
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div class="col-7">
+    <div class="container">
+
+    </div>
+  </div>
+</div>
