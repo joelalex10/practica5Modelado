@@ -7,12 +7,13 @@ export interface VExogenasLlegadaClientes{
 export interface VEstadoLlegadaClientes{
   lleClieHora:number,
   cNMaxH:number,
+  artComp:number,
   rLleClie:number,
   rArtComp:number,
-  tArtComp:number,
   cCli:number,
 }
 export interface VEndogenasLlegadaClientes{
   tArtVend:number,
-  gNeta:number
+  gNeta:number,
+  estados:VEstadoLlegadaClientes[],
 }

@@ -3,12 +3,6 @@ export interface VExogenasDado {
   cJuego:number,
   gJug:number
 }
-export interface VEndogenasDado {
-  gNeta:number,
-  nJueGanaCasa:number,
-  pJueGanaCasa:number
-  estados:VEstadoDado[],
-}
 export interface VEstadoDado{
   cNMax:number;
   sumDados:number;
@@ -17,3 +11,10 @@ export interface VEstadoDado{
   dado1:number;
   dado2:number;
 }
+export interface VEndogenasDado {
+  gNeta:number,
+  nJueGanaCasa:number,
+  pJueGanaCasa:number
+  estados:VEstadoDado[],
+}
+
