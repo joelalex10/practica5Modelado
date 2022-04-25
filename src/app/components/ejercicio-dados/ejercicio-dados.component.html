@@ -4,8 +4,6 @@
 </div>
 <hr>
 
-
-
 <div class="row">
   <div class="col-5">
     <div class="container">
@@ -58,7 +56,7 @@
               <div class="col mt-3 mx-auto d-flex justify-content-center">
                 <button  mat-raised-button color="primary" type="submit">
                   <mat-icon>arrow_forward</mat-icon>
-                  GENERAR NUMEROS
+                  GENERAR SIMULACIONES
                 </button>
               </div>
             </div>
@@ -70,7 +68,34 @@
   </div>
   <div class="col-7">
     <div class="container">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="Ganancia">
+          <mat-header-cell *matHeaderCellDef> Ganancia neta </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.gNeta}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="JuegosGanados">
+          <mat-header-cell *matHeaderCellDef> Juegos que gana la casa </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.nJueGanaCasa}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="PorcentajeJuegosGanados">
+          <mat-header-cell *matHeaderCellDef> Procentaje de juegos ganados</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.pJueGanaCasa}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Opciones">
+          <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button (click)="verLista(element.estados)" mat-raised-button color="primary">
+              <mat-icon> table_chart</mat-icon>
+              Ver Simulaciones
+            </button>
+          </mat-cell>
+        </ng-container>
 
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
     </div>
   </div>
 </div>

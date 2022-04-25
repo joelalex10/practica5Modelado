@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Lista de lanzamientos simulados</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="Contador">
+      <mat-header-cell *matHeaderCellDef> Contador </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cNMax}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="rDado1">
+      <mat-header-cell *matHeaderCellDef> R. Dado 1 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.rDado1 | number:'1.1-4'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="rDado2">
+      <mat-header-cell *matHeaderCellDef> R. Dado 2</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.rDado2 | number:'1.1-4'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Dado1">
+      <mat-header-cell *matHeaderCellDef> Dado 1 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dado1}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Dado2">
+      <mat-header-cell *matHeaderCellDef> Dado 2 </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dado2}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="SumaDados">
+      <mat-header-cell *matHeaderCellDef> Suma dados</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sumDados}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>

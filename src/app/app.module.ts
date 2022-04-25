@@ -15,6 +15,11 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from "@angular/material/table";
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogContentEstadosComponent } from './components/ejercicio-dados/dialog-content-estados/dialog-content-estados.component';
+
 
 
 @NgModule({
@@ -22,7 +27,8 @@ import {MatIconModule} from "@angular/material/icon";
     AppComponent,
     NavBarComponent,
     EjercicioDadosComponent,
-    LlegadaClientesComponent
+    LlegadaClientesComponent,
+    DialogContentEstadosComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +41,10 @@ import {MatIconModule} from "@angular/material/icon";
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

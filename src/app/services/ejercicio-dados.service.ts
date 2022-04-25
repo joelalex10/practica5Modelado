@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {VEndogenasDado, VExogenasDado} from "../models/Dado";
+import {VExogenasDado, VEstadoDado, VEndogenasDado} from "../models/Dado";
 
 @Injectable({
   providedIn: 'root'
@@ -21,21 +21,24 @@ export class EjercicioDadosService {
   nJueGanaCasa= 0;
   pJueGanaCasa= 0;
 
-  vExogenasDado:VExogenasDado={
+  vExogenasDado:VEndogenasDado={
     gNeta: 0,
     nJueGanaCasa: 0,
-    pJueGanaCasa: 0
+    pJueGanaCasa: 0,
+    estados:[],
   }
+  vEstadoDado:VEstadoDado[]=[];
 
   constructor() { }
 
-  ejecutarAlgoritmo(endogenas:VEndogenasDado){
+  public ejecutarAlgoritmo(endogenas:VExogenasDado){
     this.inicializarVariables(endogenas);
   }
-  inicializarVariables(endogenas:VEndogenasDado){
+  private inicializarVariables(endogenas:VExogenasDado){
     this.cJuego= endogenas.cJuego;
     this.gJug= endogenas.gJug;
     this.nMax= endogenas.nMax;
+    this.vEstadoDado = [];
 
     this.cNMax=0;
     this.sumDados=0;
@@ -45,52 +48,59 @@ export class EjercicioDadosService {
 
     this.aumentarCNMax();
   }
-  aumentarCNMax(){
+  private aumentarCNMax(){
     this.cNMax=this.cNMax+1;
     this.generarRDado1();
   }
-  generarRDado1(){
+  private generarRDado1(){
     this.rDado1=Math.random();
     this.generarRDado2();
   }
-  generarRDado2(){
+  private generarRDado2(){
     this.rDado2=Math.random();
     this.generarDado1();
   }
-  generarDado1(){
+  private generarDado1(){
     this.dado1 = Math.round(1+(6-1)*this.rDado1);
     this.generarDado2();
   }
-  generarDado2(){
+  private generarDado2(){
     this.dado2 = Math.round(1+(6-1)*this.rDado2);
     this.calculoSumaDados();
   }
-  calculoSumaDados(){
+  private calculoSumaDados(){
     this.sumDados=this.dado1+ this.dado2;
     //console.log(`LANZAMIENTO: ${this.cNMax}, DADO1: ${this.dado1}, DADO2: ${this.dado2}, SUMA: ${this.sumDados}`);
     this.generarResultados();
   }
-  generarResultados(){
+  private generarResultados(){
     if(this.sumDados==7){
       this.calculoGNetaPierdeCasa();
     }else{
       this.calculoGNetaGanaCasa();
     }
   }
-  calculoGNetaPierdeCasa(){
+  private calculoGNetaPierdeCasa(){
     this.gNeta=this.gNeta+this.cJuego-this.gJug;
     this.verificarNumeroLanzamientos();
   }
-  calculoGNetaGanaCasa(){
+  private calculoGNetaGanaCasa(){
     this.gNeta=this.gNeta+this.cJuego;
     this.actualizarNumeroJuegosGanaCasa();
   }
-  actualizarNumeroJuegosGanaCasa(){
+  private actualizarNumeroJuegosGanaCasa(){
     this.nJueGanaCasa=this.nJueGanaCasa+1;
     this.verificarNumeroLanzamientos();
   }
-  verificarNumeroLanzamientos(){
-
+  private verificarNumeroLanzamientos(){
+    this.vEstadoDado.push({
+      cNMax: this.cNMax,
+      dado1: this.dado1,
+      dado2: this.dado2,
+      rDado1: this.rDado1,
+      rDado2: this.rDado2,
+      sumDados: this.sumDados,
+    });
     //console.log(`LA GANANCIA NETA ES ${this.gNeta}`);
     if(this.cNMax==this.nMax){
       this.calcularPGanados();
@@ -98,16 +108,17 @@ export class EjercicioDadosService {
       this.aumentarCNMax();
     }
   }
-  calcularPGanados(){
+  private calcularPGanados(){
     this.pJueGanaCasa=(this.nJueGanaCasa/this.nMax);
     this.generarResultadosFinales();
 
   }
-  generarResultadosFinales(){
+  private generarResultadosFinales(){
     this.vExogenasDado={
       gNeta: this.gNeta,
       nJueGanaCasa: this.nJueGanaCasa,
-      pJueGanaCasa: this.pJueGanaCasa
+      pJueGanaCasa: this.pJueGanaCasa,
+      estados:this.vEstadoDado,
     };
 
   }
