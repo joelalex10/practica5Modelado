@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import {VExogenasDado} from "../models/Dado";
-import {VEndogenasLlegadaClientes, VExogenasLlegadaClientes} from "../models/LlegadaClientes";
+import {
+  CompraClientes,
+  VEndogenasLlegadaClientes,
+  VEstadoLlegadaClientes,
+  VExogenasLlegadaClientes
+} from "../models/LlegadaClientes";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +32,8 @@ export class LlegadaClientesService {
     gNeta: 0,
     tArtVend: 0
   }
+  listVEstadoLlegadaClientes:VEstadoLlegadaClientes[]=[];
+  listAuxCompraClientes:CompraClientes[]=[];
 
   constructor() { }
 
@@ -41,24 +48,33 @@ export class LlegadaClientesService {
 
     this.cNMaxH=0;
     this.tArtVend=0;
+    this.cCli=0;
+
+    this.tArtVend=0;
+    this.gNeta=0;
+
+    this.listVEstadoLlegadaClientes=[];
 
     this.incrementarContadorHoras();
   }
   private incrementarContadorHoras(){
     this.cNMaxH=this.cNMaxH+1;
+    //console.log(`CONTADOR: ${this.cNMaxH}`)
     this.generarAleatorioLlegadaClientes();
   }
   private generarAleatorioLlegadaClientes(){
-    this.rLleClie=Math.random();
+    let numberRandom =Math.random();
+    this.rLleClie=Number(numberRandom.toFixed(5));
     this.generarLlegadaClientes();
   }
   private generarLlegadaClientes(){
     this.lleClieHora=Math.round(0+(4-0)*this.rLleClie);
+    this.verificarCantidadCliente();
   }
-  private verificarLlegadaCliente(){
+  private verificarCantidadCliente(){
 
     if(this.lleClieHora==0){
-
+      this.verificarContadorHoras();
     }else{
       this.actualizarContadorClientes();
     }
@@ -68,9 +84,12 @@ export class LlegadaClientesService {
     this.generarAleatorioArticulosComprados();
   }
   private generarAleatorioArticulosComprados(){
-    this.rArtComp=Math.random();
+    let numberRandom =Math.random();
+    this.rArtComp=Number(numberRandom.toFixed(5));
+    //console.log(`HORA: ${this.cNMaxH}, CLIENTE: ${this.cCli}, RARTC: ${this.rArtComp}`);
+    this.asignatArticulosComprados();
   }
-  private AsignatArticulosComprados(){
+  private asignatArticulosComprados(){
     if(0<=this.rArtComp && this.rArtComp<0.2){
       this.artComp=0;
       this.verificarContadorClientes();
@@ -94,17 +113,34 @@ export class LlegadaClientesService {
     this.verificarContadorClientes();
   }
   private verificarContadorClientes(){
+
+    this.listAuxCompraClientes.push({
+      artComp: this.artComp,
+      cCli: this.cCli,
+      rArtComp: this.rArtComp,
+    });
     if(this.cCli==this.lleClieHora){
       this.reiniciarContadorClientes();
     }else{
-      this.verificarLlegadaCliente();
+      this.verificarCantidadCliente();
     }
   }
   private reiniciarContadorClientes(){
     this.cCli=0;
+    //console.log("LISTA DE COMPRAS");
+    //console.log(this.listAuxCompraClientes)
+    this.verificarContadorHoras();
 
   }
   private verificarContadorHoras(){
+    this.listVEstadoLlegadaClientes.push({
+      cNMaxH: this.cNMaxH,
+      compraClientes: this.listAuxCompraClientes,
+      lleClieHora: this.lleClieHora,
+      rLleClie: this.rLleClie
+    });
+    this.listAuxCompraClientes=[];
+
     if(this.cNMaxH==this.nMaxH){
       this.calcularGananciaNeta();
     }else{
@@ -113,10 +149,11 @@ export class LlegadaClientesService {
   }
   private calcularGananciaNeta(){
     this.gNeta=this.tArtVend*(this.pVentaArticulo - this.pCArt) - this.cFijo;
+    this.generarResultadosFinales();
   }
   private generarResultadosFinales(){
     this.vEndogenasLlegadaClientes={
-      estados: [],
+      estados: this.listVEstadoLlegadaClientes,
       gNeta: this.gNeta,
       tArtVend: this.tArtVend
     }

@@ -27,7 +27,7 @@ export class EjercicioDadosService {
     pJueGanaCasa: 0,
     estados:[],
   }
-  vEstadoDado:VEstadoDado[]=[];
+  listVEstadoDado:VEstadoDado[]=[];
 
   constructor() { }
 
@@ -38,7 +38,7 @@ export class EjercicioDadosService {
     this.cJuego= endogenas.cJuego;
     this.gJug= endogenas.gJug;
     this.nMax= endogenas.nMax;
-    this.vEstadoDado = [];
+    this.listVEstadoDado = [];
 
     this.cNMax=0;
     this.sumDados=0;
@@ -93,7 +93,7 @@ export class EjercicioDadosService {
     this.verificarNumeroLanzamientos();
   }
   private verificarNumeroLanzamientos(){
-    this.vEstadoDado.push({
+    this.listVEstadoDado.push({
       cNMax: this.cNMax,
       dado1: this.dado1,
       dado2: this.dado2,
@@ -118,7 +118,7 @@ export class EjercicioDadosService {
       gNeta: this.gNeta,
       nJueGanaCasa: this.nJueGanaCasa,
       pJueGanaCasa: this.pJueGanaCasa,
-      estados:this.vEstadoDado,
+      estados:this.listVEstadoDado,
     };
 
   }

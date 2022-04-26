@@ -5,12 +5,15 @@ export interface VExogenasLlegadaClientes{
   pVentaArticulo:number,
 }
 export interface VEstadoLlegadaClientes{
-  lleClieHora:number,
   cNMaxH:number,
-  artComp:number,
   rLleClie:number,
-  rArtComp:number,
+  lleClieHora:number,
+  compraClientes:CompraClientes[],
+}
+export interface CompraClientes{
   cCli:number,
+  rArtComp:number,
+  artComp:number,
 }
 export interface VEndogenasLlegadaClientes{
   tArtVend:number,
