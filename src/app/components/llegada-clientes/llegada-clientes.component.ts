@@ -35,18 +35,6 @@ export class LlegadaClientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /**this.vExogenasLlegadaClientes={
-      cFijo: 300,
-      nMaxH: 5,
-      pCArt: 50,
-      pVentaArticulo: 75
-    }
-    console.log('VARIABLES EXOGENAS');
-    console.log(this.vExogenasLlegadaClientes);
-    this.llegadaClientesService.ejecutarAlgoritmo(this.vExogenasLlegadaClientes);
-    console.log('VARIABLES ENDOGENAS');
-    console.log(this.llegadaClientesService.vEndogenasLlegadaClientes);**/
-
   }
 
   generarNumeros() {

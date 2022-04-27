@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {EjercicioDadosService} from "../../services/ejercicio-dados.service";
-import {VEndogenasDado, VEstadoDado, VExogenasDado} from "../../models/Dado";
+import {VariablesEndogenasDado, VariablesEstadoDado, VariablesExogenasDado} from "../../models/Dado";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -17,14 +17,13 @@ export class EjercicioDadosComponent implements OnInit {
   generateData: FormGroup;
   hintColor = '#ff0000';
   valid:boolean=false;
-  nroSimulaciones:number=30;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource!: MatTableDataSource<VEndogenasDado>;
+  dataSource!: MatTableDataSource<VariablesEndogenasDado>;
   displayedColumns = ['Ganancia', 'JuegosGanados', 'PorcentajeJuegosGanados', 'Opciones'];
 
-  private listVEndogenas: VEndogenasDado[]=[];
+  private listVEndogenas: VariablesEndogenasDado[]=[];
 
-  private vExogenas: VExogenasDado={
+  private vExogenas: VariablesExogenasDado={
     cJuego: 0,
     gJug: 0,
     nMax: 0
@@ -36,7 +35,8 @@ export class EjercicioDadosComponent implements OnInit {
     this.generateData = this.fb.group({
       nMax: ['', Validators.required],
       cJuego: ['', Validators.required],
-      gJug: ['', Validators.required]
+      gJug: ['', Validators.required],
+      nroSimulaciones: ['',Validators.required]
     });
   }
 
@@ -45,8 +45,12 @@ export class EjercicioDadosComponent implements OnInit {
 
   }
 
+  limpiarArreglo(){
+    this.listVEndogenas=[];
+  }
   generarNumeros() {
-    console.log(this.generateData.value);
+    this.limpiarArreglo();
+    //console.log(this.generateData.value);
     if(this.generateData.valid){
       this.valid=false;
       this.vExogenas = {
@@ -55,13 +59,14 @@ export class EjercicioDadosComponent implements OnInit {
         nMax: this.generateData.value.nMax
       }
 
-      for(let i=0;i<this.nroSimulaciones;i++){
+      for(let i=0;i<this.generateData.value.nroSimulaciones;i++){
         this.ejercicioDadosService.ejecutarAlgoritmo(this.vExogenas);
         let vExogena = this.ejercicioDadosService.vExogenasDado;
         //console.log(`${i+1}`);
         //console.log(vExogena);
         this.listVEndogenas.push(vExogena);
       }
+      console.log(this.listVEndogenas);
       this.visualizarResultados();
 
     }else{
@@ -69,12 +74,12 @@ export class EjercicioDadosComponent implements OnInit {
     }
   }
   visualizarResultados(){
-    this.dataSource= new MatTableDataSource<VEndogenasDado>(this.listVEndogenas)
+    this.dataSource= new MatTableDataSource<VariablesEndogenasDado>(this.listVEndogenas)
     this.dataSource.paginator = this.paginator;
   }
 
 
-  verLista(vEstados:VEstadoDado[]) {
+  verLista(vEstados:VariablesEstadoDado[]) {
     const dialogRef = this.dialog.open(DialogContentEstadosComponent, {
       width: '700px',
       data: {estados: vEstados},

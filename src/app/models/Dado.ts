@@ -1,9 +1,9 @@
-export interface VExogenasDado {
+export interface VariablesExogenasDado {
   nMax:number,
   cJuego:number,
   gJug:number
 }
-export interface VEstadoDado{
+export interface VariablesEstadoDado {
   cNMax:number;
   sumDados:number;
   rDado1:number;
@@ -11,10 +11,10 @@ export interface VEstadoDado{
   dado1:number;
   dado2:number;
 }
-export interface VEndogenasDado {
+export interface VariablesEndogenasDado {
   gNeta:number,
   nJueGanaCasa:number,
   pJueGanaCasa:number
-  estados:VEstadoDado[],
+  estados:VariablesEstadoDado[],
 }
 

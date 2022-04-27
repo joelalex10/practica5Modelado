@@ -19,6 +19,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogContentEstadosComponent } from './components/ejercicio-dados/dialog-content-estados/dialog-content-estados.component';
+import { EjercicioGallinasComponent } from './components/ejercicio-gallinas/ejercicio-gallinas.component';
 
 
 
@@ -28,7 +29,8 @@ import { DialogContentEstadosComponent } from './components/ejercicio-dados/dial
     NavBarComponent,
     EjercicioDadosComponent,
     LlegadaClientesComponent,
-    DialogContentEstadosComponent
+    DialogContentEstadosComponent,
+    EjercicioGallinasComponent
   ],
   imports: [
     BrowserModule,

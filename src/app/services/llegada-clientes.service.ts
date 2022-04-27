@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {VExogenasDado} from "../models/Dado";
+import {VariablesExogenasDado} from "../models/Dado";
 import {
   CompraClientes,
   VEndogenasLlegadaClientes,

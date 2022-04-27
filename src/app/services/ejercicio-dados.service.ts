@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {VExogenasDado, VEstadoDado, VEndogenasDado} from "../models/Dado";
+import {VariablesExogenasDado, VariablesEstadoDado, VariablesEndogenasDado} from "../models/Dado";
 
 @Injectable({
   providedIn: 'root'
@@ -21,20 +21,20 @@ export class EjercicioDadosService {
   nJueGanaCasa= 0;
   pJueGanaCasa= 0;
 
-  vExogenasDado:VEndogenasDado={
+  vExogenasDado:VariablesEndogenasDado={
     gNeta: 0,
     nJueGanaCasa: 0,
     pJueGanaCasa: 0,
     estados:[],
   }
-  listVEstadoDado:VEstadoDado[]=[];
+  listVEstadoDado:VariablesEstadoDado[]=[];
 
   constructor() { }
 
-  public ejecutarAlgoritmo(endogenas:VExogenasDado){
+  public ejecutarAlgoritmo(endogenas:VariablesExogenasDado){
     this.inicializarVariables(endogenas);
   }
-  private inicializarVariables(endogenas:VExogenasDado){
+  private inicializarVariables(endogenas:VariablesExogenasDado){
     this.cJuego= endogenas.cJuego;
     this.gJug= endogenas.gJug;
     this.nMax= endogenas.nMax;
@@ -117,7 +117,7 @@ export class EjercicioDadosService {
     this.vExogenasDado={
       gNeta: this.gNeta,
       nJueGanaCasa: this.nJueGanaCasa,
-      pJueGanaCasa: this.pJueGanaCasa,
+      pJueGanaCasa: Number(this.pJueGanaCasa.toFixed(2)),
       estados:this.listVEstadoDado,
     };
 

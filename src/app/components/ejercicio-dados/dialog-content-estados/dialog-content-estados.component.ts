@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
-import {VEndogenasDado, VEstadoDado} from "../../../models/Dado";
+import {VariablesEndogenasDado, VariablesEstadoDado} from "../../../models/Dado";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 
 export interface DialogData {
-  estados: VEstadoDado[];
+  estados: VariablesEstadoDado[];
 }
 @Component({
   selector: 'app-dialog-content-estados',
@@ -17,7 +17,7 @@ export interface DialogData {
 export class DialogContentEstadosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource!: MatTableDataSource<VEstadoDado>;
+  dataSource!: MatTableDataSource<VariablesEstadoDado>;
 
   displayedColumns = ['Contador','rDado1','rDado2','Dado1','Dado2' ,'SumaDados'];
 
@@ -28,7 +28,7 @@ export class DialogContentEstadosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataSource= new MatTableDataSource<VEstadoDado>(this.data.estados)
+    this.dataSource= new MatTableDataSource<VariablesEstadoDado>(this.data.estados)
     this.dataSource.paginator = this.paginator;
   }
 
