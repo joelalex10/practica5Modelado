@@ -23,6 +23,7 @@ import { EjercicioGallinasComponent } from './components/ejercicio-gallinas/ejer
 import { DialogClientesEstadosComponent } from './components/llegada-clientes/dialog-clientes-estados/dialog-clientes-estados.component';
 import { DialogClientesEstadosComprasComponent } from './components/llegada-clientes/dialog-clientes-estados-compras/dialog-clientes-estados-compras.component';
 import { DialogGallinaEstadosComponent } from './components/ejercicio-gallinas/dialog-gallina-estados/dialog-gallina-estados.component';
+import { AgenciaAzucarComponent } from './components/agencia-azucar/agencia-azucar.component';
 
 
 
@@ -36,7 +37,8 @@ import { DialogGallinaEstadosComponent } from './components/ejercicio-gallinas/d
     EjercicioGallinasComponent,
     DialogClientesEstadosComponent,
     DialogClientesEstadosComprasComponent,
-    DialogGallinaEstadosComponent
+    DialogGallinaEstadosComponent,
+    AgenciaAzucarComponent
   ],
   imports: [
     BrowserModule,
