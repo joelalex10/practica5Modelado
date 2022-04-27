@@ -20,6 +20,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogContentEstadosComponent } from './components/ejercicio-dados/dialog-content-estados/dialog-content-estados.component';
 import { EjercicioGallinasComponent } from './components/ejercicio-gallinas/ejercicio-gallinas.component';
+import { DialogClientesEstadosComponent } from './components/llegada-clientes/dialog-clientes-estados/dialog-clientes-estados.component';
+import { DialogClientesEstadosComprasComponent } from './components/llegada-clientes/dialog-clientes-estados-compras/dialog-clientes-estados-compras.component';
 
 
 
@@ -30,7 +32,9 @@ import { EjercicioGallinasComponent } from './components/ejercicio-gallinas/ejer
     EjercicioDadosComponent,
     LlegadaClientesComponent,
     DialogContentEstadosComponent,
-    EjercicioGallinasComponent
+    EjercicioGallinasComponent,
+    DialogClientesEstadosComponent,
+    DialogClientesEstadosComprasComponent
   ],
   imports: [
     BrowserModule,

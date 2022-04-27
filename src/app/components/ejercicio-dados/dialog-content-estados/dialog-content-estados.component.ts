@@ -27,9 +27,7 @@ export class DialogContentEstadosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.dataSource= new MatTableDataSource<VariablesEstadoDado>(this.data.estados)
-    this.dataSource.paginator = this.paginator;
   }
 
 }

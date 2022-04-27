@@ -84,7 +84,6 @@ export class EjercicioDadosComponent implements OnInit {
       width: '700px',
       data: {estados: vEstados},
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

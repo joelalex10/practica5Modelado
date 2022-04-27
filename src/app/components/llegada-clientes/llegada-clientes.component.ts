@@ -1,8 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LlegadaClientesService} from "../../services/llegada-clientes.service";
-import {VExogenasLlegadaClientes} from "../../models/LlegadaClientes";
+import {
+  VEndogenasLlegadaClientes,
+  VEstadoLlegadaClientes,
+  VExogenasLlegadaClientes
+} from "../../models/LlegadaClientes";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {
+  DialogContentEstadosComponent
+} from "../ejercicio-dados/dialog-content-estados/dialog-content-estados.component";
+import {DialogClientesEstadosComponent} from "./dialog-clientes-estados/dialog-clientes-estados.component";
 
 @Component({
   selector: 'app-llegada-clientes',
@@ -14,6 +24,11 @@ export class LlegadaClientesComponent implements OnInit {
   generateData: FormGroup;
   hintColor = '#ff0000';
   valid:boolean=false;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource!: MatTableDataSource<VEndogenasLlegadaClientes>;
+  displayedColumns = ['TotalArticulosVendidos', 'GananciaNeta', 'Opciones'];
+
   nroSimulaciones:number=30;
 
   vExogenasLlegadaClientes:VExogenasLlegadaClientes={
@@ -23,6 +38,8 @@ export class LlegadaClientesComponent implements OnInit {
     pVentaArticulo: 0
   };
 
+  private listVEndogenas: VEndogenasLlegadaClientes[]=[];
+
   constructor(private llegadaClientesService:LlegadaClientesService,
               private fb:FormBuilder,
               public dialog: MatDialog) {
@@ -30,14 +47,19 @@ export class LlegadaClientesComponent implements OnInit {
       cFijo: ['', Validators.required],
       nMaxH: ['', Validators.required],
       pCArt: ['', Validators.required],
-      pVentaArticulo: ['', Validators.required]
+      pVentaArticulo: ['', Validators.required],
+      nroSimulaciones: ['',Validators.required]
     });
   }
 
   ngOnInit(): void {
   }
 
+  limpiarArreglo(){
+    this.listVEndogenas=[];
+  }
   generarNumeros() {
+    this.limpiarArreglo();
     //console.log(this.generateData.value);
     if(this.generateData.valid){
       this.valid=false;
@@ -47,11 +69,14 @@ export class LlegadaClientesComponent implements OnInit {
         pCArt: this.generateData.value.pCArt,
         pVentaArticulo: this.generateData.value.pVentaArticulo
       }
-      for(let i=0;i<30;i++){
+      for(let i=0;i<this.generateData.value.nroSimulaciones;i++){
         this.llegadaClientesService.ejecutarAlgoritmo(this.vExogenasLlegadaClientes);
-        let result = this.llegadaClientesService.vEndogenasLlegadaClientes;
-        console.log(result);
+        let vExogena = this.llegadaClientesService.vEndogenasLlegadaClientes;
+        this.listVEndogenas.push(vExogena);
+        console.log(vExogena);
       }
+      console.log(this.listVEndogenas);
+      this.visualizarResultados();
 
         //let vExogena = this.ejercicioDadosService.vExogenasDado;
         //console.log(`${i+1}`);
@@ -62,5 +87,20 @@ export class LlegadaClientesComponent implements OnInit {
     }else{
       this.valid=true;
     }
+
+  }
+  visualizarResultados(){
+    this.dataSource= new MatTableDataSource<VEndogenasLlegadaClientes>(this.listVEndogenas)
+    this.dataSource.paginator = this.paginator;
+  }
+
+  verLista(estados: VEstadoLlegadaClientes[]) {
+    const dialogRef = this.dialog.open(DialogClientesEstadosComponent, {
+      width: '1000px',
+      data: {estados: estados},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
