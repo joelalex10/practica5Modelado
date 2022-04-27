@@ -7,13 +7,16 @@ export interface VariablesEstadoGallinas{
   CNMaxD:number,
   rNHG:number,
   NHG:number,
-
+  huevosPuestos?:HuevosPuestosGallinas[],
+}
+export interface HuevosPuestosGallinas{
   cHue:number,
   rAEH:number,
-
   NHue:number,
-  rAEP:number,
+
+  rAEP:number|null,
   NPS:number
+
 }
 export interface VariablesEndogenasGallinas{
   Ib:number,

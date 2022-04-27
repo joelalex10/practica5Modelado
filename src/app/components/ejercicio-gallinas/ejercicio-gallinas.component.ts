@@ -23,6 +23,8 @@ export class EjercicioGallinasComponent implements OnInit {
       PVP: 30
     }
     this.ejercicioGallinasService.ejecutarAlgoritmo(this.variablesExogenasGallinas);
+    let result = this.ejercicioGallinasService.variablesEndogenasGallinas;
+    console.log(result);
   }
 
 }
