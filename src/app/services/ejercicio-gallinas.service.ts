@@ -63,6 +63,10 @@ export class EjercicioGallinasService {
     this.NPM=0;
     this.IngP=0;
 
+
+    this.listVEstadoGallinas=[];
+    this.listHuevosPuestosGallinas=[];
+
     this.actualizarContadorDias();
   }
   private actualizarContadorDias(){
@@ -176,7 +180,11 @@ export class EjercicioGallinasService {
       NPS: this.NPS,
       cHue: this.cHue,
       rAEH: this.rAEH,
-      rAEP: this.rAEP
+      rAEP: this.rAEP,
+      stateNHue: this.NHue,
+      stateNHR: this.NHR,
+      stateNPS: this.NPS,
+      stateNPM:this.NPM,
     });
     //console.log(this.listHuevosPuestosGallinas);
     console.log(`CONTADOR HUEVOS ${this.cHue}; ALEATORIO ESTADO HUEVO: ${this.rAEH}; HUEVOS PERFECTOS: ${this.NHue}; HUEVOS ROTOS: ${this.NHR}; ALEATORIO ESTADO POLLO: ${this.rAEP}  POLLOS SOBREVIVEN: ${this.NPS}; POLLOS MUEREN: ${this.NPM}`);

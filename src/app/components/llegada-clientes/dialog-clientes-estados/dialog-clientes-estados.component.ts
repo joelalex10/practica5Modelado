@@ -31,10 +31,11 @@ export class DialogClientesEstadosComponent implements OnInit {
     this.dataSource= new MatTableDataSource<VEstadoLlegadaClientes>(this.data.estados);
   }
 
-  verLista(compraClientes: CompraClientes[]) {
+  verLista(vCompraClientes: CompraClientes[]) {
+    console.log(vCompraClientes);
     const dialogRef = this.dialog.open(DialogClientesEstadosComprasComponent, {
       width: '1000px',
-      data: {estados: compraClientes},
+      data: {compraClientes: vCompraClientes},
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

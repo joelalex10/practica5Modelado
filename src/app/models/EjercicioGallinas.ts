@@ -17,6 +17,11 @@ export interface HuevosPuestosGallinas{
   rAEP:number|null,
   NPS:number
 
+  stateNHue:number,
+  stateNHR:number,
+  stateNPS:number,
+  stateNPM:number
+
 }
 export interface VariablesEndogenasGallinas{
   Ib:number,

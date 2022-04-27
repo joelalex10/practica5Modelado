@@ -22,6 +22,7 @@ import { DialogContentEstadosComponent } from './components/ejercicio-dados/dial
 import { EjercicioGallinasComponent } from './components/ejercicio-gallinas/ejercicio-gallinas.component';
 import { DialogClientesEstadosComponent } from './components/llegada-clientes/dialog-clientes-estados/dialog-clientes-estados.component';
 import { DialogClientesEstadosComprasComponent } from './components/llegada-clientes/dialog-clientes-estados-compras/dialog-clientes-estados-compras.component';
+import { DialogGallinaEstadosComponent } from './components/ejercicio-gallinas/dialog-gallina-estados/dialog-gallina-estados.component';
 
 
 
@@ -34,7 +35,8 @@ import { DialogClientesEstadosComprasComponent } from './components/llegada-clie
     DialogContentEstadosComponent,
     EjercicioGallinasComponent,
     DialogClientesEstadosComponent,
-    DialogClientesEstadosComprasComponent
+    DialogClientesEstadosComprasComponent,
+    DialogGallinaEstadosComponent
   ],
   imports: [
     BrowserModule,

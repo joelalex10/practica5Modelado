@@ -1,1 +1,24 @@
-<p>dialog-clientes-estados-compras works!</p>
+<h2 mat-dialog-title>Lista de lanzamientos simulados</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="ContadorCliente">
+      <mat-header-cell *matHeaderCellDef> Contador Clientes </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cCli}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="AleatorioCompraCliente">
+      <mat-header-cell *matHeaderCellDef> Aleatorio Articulos Comprados </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.rArtComp }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CompraCliente">
+      <mat-header-cell *matHeaderCellDef> Nro Articulos Comprados</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.artComp}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

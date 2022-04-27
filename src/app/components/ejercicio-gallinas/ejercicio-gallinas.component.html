@@ -1,1 +1,115 @@
-<p>ejercicio-gallinas works!</p>
+
+<div class="title">
+  <mat-card-title>EJERCICIO GALLINAS</mat-card-title>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-5">
+    <div class="container">
+      <div class="row">
+        <mat-card>
+          <mat-card-title>Ingresar Parametros</mat-card-title>
+          <span *ngIf="valid; else space" [ngStyle]="{color:hintColor }">*Todos los campos son obligatorios</span>
+          <ng-template #space>
+            <br>
+          </ng-template>
+          <form [formGroup]="generateData" (ngSubmit)="generarNumeros()">
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100" >
+                <mat-label>Numero Maximo de Dias</mat-label>
+                <input matInput
+                       placeholder="Ingrese el numero maximo de dias"
+                       type="number"
+                       formControlName="NMaxD"
+                       required>
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Precio de venta del huevo</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ingrese el precio de venta de los huevos"
+                       formControlName="PVH"
+                       required>
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Precio de venta del pollo</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ingrese el precio de venta del pollo"
+                       formControlName="PVP"
+                       required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Numero de simulaciones</mat-label>
+                <input matInput
+                       type="number"
+                       placeholder="Ingrese el numero de simulaciones"
+                       formControlName="nroSimulaciones"
+                       required>
+
+              </mat-form-field>
+            </div>
+
+            <div class="row ">
+              <div class="col mt-3 mx-auto d-flex justify-content-center">
+                <button  mat-raised-button color="primary" type="submit">
+                  <mat-icon>arrow_forward</mat-icon>
+                  GENERAR SIMULACIONES
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div class="col-7">
+
+    <div class="container">
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="IngresoBruto">
+          <mat-header-cell *matHeaderCellDef> Ingreso Bruto </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Ib}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="IngresoPromedio">
+          <mat-header-cell *matHeaderCellDef> Ingreso Promedio </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.IngP}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="NroDeHuevosRotos">
+          <mat-header-cell *matHeaderCellDef> Nro Huevos Rotos</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.NHR}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="NroDePollosMuertos">
+          <mat-header-cell *matHeaderCellDef> Nro Pollos Muertos</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.NPM}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Opciones">
+          <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button (click)="verLista(element.estados)" mat-raised-button color="primary">
+              <mat-icon> table_chart</mat-icon>
+              Ver Simulacion
+            </button>
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+    </div>
+  </div>
+</div>
