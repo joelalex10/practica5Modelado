@@ -9,14 +9,14 @@ export interface VariablesExogenasAgenciaAzucar{
 export interface VariablesEstadoAgenciaAzucar{
   CNmaxD:number,
   InvAzu:number,
-  DIns:number,
+  /**DIns:number,*/
   rDAzu:number,
   DAzu:number,
   rTiEnt:number,
   TiEnt:number,
   PAzu:number,
   Ibru:number,
-  CAdq:number,
+  /**CAdq:number,*/
   CTROD:number,
   CTM:number,
   CTAdq:number,
