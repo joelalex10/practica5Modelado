@@ -80,34 +80,47 @@
   </div>
   <div class="col-7">
     <div class="container">
-      <mat-table #table [dataSource]="dataSource">
-        <ng-container matColumnDef="Ganancia">
-          <mat-header-cell *matHeaderCellDef> Ganancia neta </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.gNeta}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="JuegosGanados">
-          <mat-header-cell *matHeaderCellDef> Juegos que gana la casa </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.nJueGanaCasa}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="PorcentajeJuegosGanados">
-          <mat-header-cell *matHeaderCellDef> Procentaje de juegos ganados</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.pJueGanaCasa}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Opciones">
-          <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <button (click)="verLista(element.estados)" mat-raised-button color="primary">
-              <mat-icon> table_chart</mat-icon>
-              Ver Lanzamientos
-            </button>
-          </mat-cell>
-        </ng-container>
+
+      <mat-card>
+        <mat-card-title>Lista de Simulaciones</mat-card-title>
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="Ganancia">
+            <mat-header-cell *matHeaderCellDef> Ganancia neta </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.gNeta}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="JuegosGanados">
+            <mat-header-cell *matHeaderCellDef> Juegos que gana la casa </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nJueGanaCasa}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="PorcentajeJuegosGanados">
+            <mat-header-cell *matHeaderCellDef> Procentaje de juegos ganados</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.pJueGanaCasa}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Opciones">
+            <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button (click)="verLista(element.estados)" mat-raised-button color="primary">
+                <mat-icon> table_chart</mat-icon>
+                Ver Lanzamientos
+              </button>
+            </mat-cell>
+          </ng-container>
 
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[3, 6, 12, 24]"></mat-paginator>
+      </mat-card>
+      <br>
+      <mat-card>
+        <mat-card-title>Promedio de simulaciones</mat-card-title>
+        <br>
+        <mat-card-subtitle>Ganancia Neta: {{ promVariablesEndogenasDado.gNeta }}</mat-card-subtitle>
+        <mat-card-subtitle>Juegos Gana Casa: {{ promVariablesEndogenasDado.nJueGanaCasa }} </mat-card-subtitle>
+        <mat-card-subtitle>% Juegos Gana Casa: {{ promVariablesEndogenasDado.pJueGanaCasa }} </mat-card-subtitle>
+      </mat-card>
+
     </div>
   </div>
 </div>

@@ -18,5 +18,5 @@ export interface CompraClientes{
 export interface VEndogenasLlegadaClientes{
   tArtVend:number,
   gNeta:number,
-  estados:VEstadoLlegadaClientes[],
+  estados?:VEstadoLlegadaClientes[],
 }

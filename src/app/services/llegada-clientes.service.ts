@@ -32,6 +32,7 @@ export class LlegadaClientesService {
     gNeta: 0,
     tArtVend: 0
   }
+
   listVEstadoLlegadaClientes:VEstadoLlegadaClientes[]=[];
   listAuxCompraClientes:CompraClientes[]=[];
 

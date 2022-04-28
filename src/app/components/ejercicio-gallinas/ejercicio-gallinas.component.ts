@@ -34,6 +34,13 @@ export class EjercicioGallinasComponent implements OnInit {
 
   listVEndogenas:VariablesEndogenasGallinas[]=[];
 
+  promVariablesEndogenasGallinas:VariablesEndogenasGallinas={
+    Ib: 0,
+    IngP: 0,
+    NHR: 0,
+    NPM: 0
+  }
+
   constructor(private ejercicioGallinasService:EjercicioGallinasService,
               private fb:FormBuilder,
               public dialog: MatDialog) {
@@ -84,6 +91,7 @@ export class EjercicioGallinasComponent implements OnInit {
   visualizarResultados(){
     this.dataSource= new MatTableDataSource<VariablesEndogenasGallinas>(this.listVEndogenas)
     this.dataSource.paginator = this.paginator;
+    this.calcularPromedios();
   }
 
   verLista(vEstados: VariablesEstadoGallinas) {
@@ -94,5 +102,36 @@ export class EjercicioGallinasComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  private calcularPromedios() {
+
+    let promIb =0;
+    let promIngP=0;
+    let promNHR =0;
+    let promNPM=0;
+
+    let sumIb = 0;
+    let sumIngP=0;
+    let sumNHR = 0;
+    let sumNPM=0;
+
+    for(let i=0;i<this.listVEndogenas.length;i++){
+      sumIb = sumIb+ this.listVEndogenas[i].Ib;
+      sumIngP = sumIngP + this.listVEndogenas[i].IngP;
+      sumNHR = sumNHR+ this.listVEndogenas[i].NHR;
+      sumNPM = sumNPM + this.listVEndogenas[i].NPM;
+    }
+
+    promIb = sumIb / this.listVEndogenas.length;
+    promIngP = sumIngP / this.listVEndogenas.length;
+    promNHR = sumNHR / this.listVEndogenas.length;
+    promNPM = sumNPM / this.listVEndogenas.length;
+    this.promVariablesEndogenasGallinas={
+      Ib: Number(promIb.toFixed(2)),
+      IngP: Number(promIngP.toFixed(2)),
+      NHR: Number(promNHR.toFixed(2)),
+      NPM: Number(promNPM.toFixed(2))
+    }
   }
 }

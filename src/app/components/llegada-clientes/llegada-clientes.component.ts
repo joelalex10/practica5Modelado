@@ -28,7 +28,6 @@ export class LlegadaClientesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource!: MatTableDataSource<VEndogenasLlegadaClientes>;
   displayedColumns = ['TotalArticulosVendidos', 'GananciaNeta', 'Opciones'];
-
   nroSimulaciones:number=30;
 
   vExogenasLlegadaClientes:VExogenasLlegadaClientes={
@@ -38,7 +37,12 @@ export class LlegadaClientesComponent implements OnInit {
     pVentaArticulo: 0
   };
 
+
   private listVEndogenas: VEndogenasLlegadaClientes[]=[];
+  promVEndogenasLlegadaClientes:VEndogenasLlegadaClientes={
+    gNeta: 0,
+    tArtVend: 0
+  }
 
   constructor(private llegadaClientesService:LlegadaClientesService,
               private fb:FormBuilder,
@@ -92,6 +96,7 @@ export class LlegadaClientesComponent implements OnInit {
   visualizarResultados(){
     this.dataSource= new MatTableDataSource<VEndogenasLlegadaClientes>(this.listVEndogenas)
     this.dataSource.paginator = this.paginator;
+    this.CalcularPromedios();
   }
 
   verLista(estados: VEstadoLlegadaClientes[]) {
@@ -102,5 +107,27 @@ export class LlegadaClientesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  private CalcularPromedios() {
+
+    let promGNeta =0;
+    let promTArtVend=0;
+
+    let sumGNeta = 0;
+    let sumTArtVend=0;
+
+    for(let i=0;i<this.listVEndogenas.length;i++){
+      sumGNeta = sumGNeta+ this.listVEndogenas[i].gNeta;
+      sumTArtVend = sumTArtVend + this.listVEndogenas[i].tArtVend;
+    }
+
+    promGNeta = sumGNeta / this.listVEndogenas.length;
+    promTArtVend = sumTArtVend / this.listVEndogenas.length;
+
+    this.promVEndogenasLlegadaClientes={
+      gNeta: Number(promGNeta.toFixed(2)),
+      tArtVend: Number(promTArtVend.toFixed(2))
+    }
   }
 }

@@ -28,5 +28,5 @@ export interface VariablesEndogenasGallinas{
   NHR:number,
   NPM:number,
   IngP:number,
-  estados:VariablesEstadoGallinas[],
+  estados?:VariablesEstadoGallinas[],
 }

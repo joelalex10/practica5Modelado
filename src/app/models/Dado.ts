@@ -15,6 +15,6 @@ export interface VariablesEndogenasDado {
   gNeta:number,
   nJueGanaCasa:number,
   pJueGanaCasa:number
-  estados:VariablesEstadoDado[],
+  estados?:VariablesEstadoDado[],
 }
 

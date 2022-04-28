@@ -28,6 +28,11 @@ export class EjercicioDadosComponent implements OnInit {
     gJug: 0,
     nMax: 0
   };
+  promVariablesEndogenasDado:VariablesEndogenasDado={
+    gNeta: 0,
+    nJueGanaCasa: 0,
+    pJueGanaCasa: 0
+  }
 
   constructor(private ejercicioDadosService:EjercicioDadosService,
               private fb:FormBuilder,
@@ -76,6 +81,7 @@ export class EjercicioDadosComponent implements OnInit {
   visualizarResultados(){
     this.dataSource= new MatTableDataSource<VariablesEndogenasDado>(this.listVEndogenas)
     this.dataSource.paginator = this.paginator;
+    this.calcularPromedios();
   }
 
 
@@ -87,5 +93,31 @@ export class EjercicioDadosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  private calcularPromedios() {
+    let promGNeta= 0;
+    let promNJueGanaCasa= 0;
+    let promPJueGanaCasa= 0;
+
+    let sumGNeta= 0;
+    let sumNJueGanaCasa= 0;
+    let sumPJueGanaCasa= 0;
+
+    for(let i=0;i<this.generateData.value.nroSimulaciones;i++){
+      sumGNeta = sumGNeta+ this.listVEndogenas[i].gNeta;
+      sumNJueGanaCasa = sumNJueGanaCasa + this.listVEndogenas[i].nJueGanaCasa;
+      sumPJueGanaCasa = sumPJueGanaCasa + this.listVEndogenas[i].pJueGanaCasa;
+    }
+
+    promGNeta= sumGNeta / this.listVEndogenas.length;
+    promNJueGanaCasa= sumNJueGanaCasa / this.listVEndogenas.length;
+    promPJueGanaCasa= sumPJueGanaCasa / this.listVEndogenas.length;
+
+    this.promVariablesEndogenasDado={
+      gNeta: Number(promGNeta.toFixed(2)),
+      nJueGanaCasa: Number(promNJueGanaCasa.toFixed(2)),
+      pJueGanaCasa: Number(promPJueGanaCasa.toFixed(2))
+    }
   }
 }
